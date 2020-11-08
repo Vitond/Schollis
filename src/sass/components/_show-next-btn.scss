@@ -1,0 +1,23 @@
+.show-next-btn {
+    margin-top: 2rem;
+    background-color: $color-white;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem 2rem;
+    border: none;
+    cursor: pointer;
+    transition: all .2s;
+
+    font-size: 1.6rem;
+    text-align: center;
+    color: $color-primary;
+    font-family: 'PT Sans', sans-serif;
+
+    display: block;
+
+    &:hover {
+      transform: translateY(-3px);
+      background-color: $color-primary;
+      color: $color-white;
+    }
+}

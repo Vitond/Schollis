@@ -1,0 +1,36 @@
+.sidebar {
+  background-color: $color-primary;
+
+  font-size: 1.6rem;
+
+  flex: 0 0 300px;
+  align-self: stretch;
+}
+.site-nav {
+  margin-top: 10rem;
+
+  letter-spacing: 1px;
+
+  display: flex;
+  flex-direction: column;
+
+  &__list {
+    width: 100%;
+    list-style: none;
+  }
+  &__item {
+    background-color: $color-gray-light-1;
+    height: $item-height;
+    cursor: pointer;
+
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}

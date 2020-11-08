@@ -1,0 +1,238 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit; }
+
+body {
+  box-sizing: border-box; }
+
+html {
+  font-size: 62.5%;
+  font-family: "PT Sans", sans-serif; }
+
+.heading--secondary {
+  font-size: 300%;
+  font-weight: normal; }
+
+.timetable {
+  margin-top: 8rem;
+  font-size: 1.3rem;
+  border: 1px solid #f1f1f1;
+  align-self: flex-start; }
+  .timetable__timestamp {
+    padding: 20px 0;
+    display: flex; }
+    .timetable__timestamp:not(:last-child) {
+      border-bottom: 1px solid #f1f1f1; }
+  .timetable__day {
+    display: flex; }
+    .timetable__day:not(:last-child) {
+      border-bottom: 1px solid #f1f1f1; }
+  .timetable__dayname {
+    padding: 2rem;
+    background-color: #72c4ff;
+    width: 10rem;
+    color: #fff;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    align-items: center;
+    display: flex; }
+
+.subject {
+  padding: 1rem;
+  width: 10rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative; }
+  .subject:not(:first-child) {
+    border-left: 1px solid #f1f1f1; }
+  .subject:not(:last-child) {
+    border-right: 1px solid #f1f1f1; }
+  .subject__symbol {
+    text-align: center;
+    font-size: 250%; }
+  .subject__teacher {
+    color: #c3acac;
+    text-align: center;
+    font-size: 1.2rem; }
+  .subject__classroom {
+    color: #525252;
+    text-align: center; }
+  .subject--changed {
+    border: 1px solid #ffb169;
+    position: relative; }
+  .subject--crosschecked {
+    border: 1px solid #ff2323; }
+    .subject--crosschecked::after {
+      content: "";
+      clip-path: polygon(0% 99%, 99% 0%, 100% 0, 100% 1%, 1% 100%, 0% 100%);
+      width: 100%;
+      height: 100%;
+      background-color: red;
+      top: 0;
+      position: absolute; }
+
+.break {
+  position: relative; }
+  .break__text {
+    width: 10rem;
+    font-size: 1.2rem;
+    color: #c3acac;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%) rotate(-90deg); }
+
+.timestamp__cejch {
+  text-align: center; }
+  .timestamp__cejch--day {
+    width: 10rem; }
+  .timestamp__cejch--predm {
+    width: 10rem; }
+  .timestamp__cejch--break10 {
+    width: 2rem; }
+  .timestamp__cejch--break15 {
+    width: 3rem; }
+
+.show-next-btn {
+  margin-top: 2rem;
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 2rem;
+  border: none;
+  cursor: pointer;
+  transition: all .2s;
+  font-size: 1.6rem;
+  text-align: center;
+  color: #72c4ff;
+  font-family: 'PT Sans', sans-serif;
+  display: block; }
+  .show-next-btn:hover {
+    transform: translateY(-3px);
+    background-color: #72c4ff;
+    color: #fff; }
+
+.sidebar {
+  background-color: #72c4ff;
+  font-size: 1.6rem;
+  flex: 0 0 300px;
+  align-self: stretch; }
+
+.site-nav {
+  margin-top: 10rem;
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: column; }
+  .site-nav__list {
+    width: 100%;
+    list-style: none; }
+  .site-nav__item {
+    background-color: #f1f1f1;
+    height: 6rem;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .site-nav__item:not(:last-child) {
+      margin-bottom: 20px; }
+
+.main-area {
+  padding: 10rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1; }
+
+.container {
+  width: 100%;
+  display: flex; }
+
+.marks {
+  margin-right: 10rem;
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 1px; }
+  .marks__list {
+    list-style: none; }
+  .marks__mark {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: #fff;
+    margin-bottom: 1rem;
+    height: 6rem;
+    border: 2px solid #e7f5ff;
+    cursor: pointer;
+    transition: all .1s;
+    font-size: 1.4rem;
+    color: #525252;
+    display: flex;
+    align-items: center; }
+    .marks__mark:hover {
+      background-color: #e7f5ff;
+      border: 2px solid #72c4ff;
+      color: #000; }
+  .marks__description {
+    flex: 0 1 75%; }
+  .marks__subject {
+    flex: 0 0 20%; }
+  .marks__value {
+    flex: 0 0 5%; }
+  .marks__button-container {
+    background-color: #e7f5ff;
+    padding-bottom: 2rem;
+    flex-grow: 1; }
+  .marks__heading {
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center; }
+
+.messages {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  letter-spacing: 1px; }
+  .messages__heading {
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center; }
+  .messages__list {
+    list-style: none; }
+  .messages__message {
+    width: 100%;
+    height: 6rem;
+    background-color: white;
+    border: 2px solid #e7f5ff;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: #525252;
+    display: flex;
+    flex-direction: column; }
+    .messages__message:hover {
+      background-color: #e7f5ff;
+      border: 2px solid #72c4ff;
+      color: #000; }
+  .messages__button-container {
+    background-color: #e7f5ff;
+    padding-bottom: 2rem;
+    flex-grow: 1; }
+  .messages__sender {
+    color: #c3acac; }
+  .messages__name {
+    margin-top: 8px; }
+
+.row {
+  height: 50rem;
+  display: flex; }
