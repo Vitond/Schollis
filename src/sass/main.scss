@@ -1,12 +1,18 @@
 @import 'abstracts/variables';
+@import 'abstracts/animations';
 
 @import 'base/base';
 @import 'base/typography';
 
-@import 'components/timetable';
+@import 'components/timetable/timetable--classic';
+@import 'components/timetable/timetable--schollis';
+@import 'components/timetable/marker';
 @import 'components/show-next-btn';
+@import 'components/home/marks';
+@import 'components/home/messages';
 
-@import 'layout/sidebar';
+@import 'layout/sidebar/sidebar';
+@import 'layout/sidebar/site-nav';
 @import 'layout/layout';
 
 @import 'pages/home';

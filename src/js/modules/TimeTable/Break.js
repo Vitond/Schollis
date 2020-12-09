@@ -1,16 +1,27 @@
-import {CONST_SIZEFOR10MIN} from '../../constants/constants.js';
+
 
 class Break {
-  constructor(length, lunchTime = false) {
-    this.length = length;
-    this.lunchTime = lunchTime;
+  constructor(props, dayEl, setElementHeightOrWidth) {
+
+    // Duration of the break in minutess
+    this.length = props.length;
+
+    // Is it lunch?
+    this.lunchTime = props.lunchTime;
+
+    // Keeping track of the day element
+    this.dayEl = dayEl;
+    
+    // Method for setting the element width or height based on its length in minutes
+    this.setElementHeightOrWidth = setElementHeightOrWidth;
   }
 
-  render(day, timeTable) {
+  // Renders element
+  render() {
     const item = document.createElement("div");
 
-    item.className = `break break--${this.length}`;
-    item.style.width = `${this.calcWidth()}rem`;
+    item.className = `break`;
+
     item.innerHTML = `
               <div class="break__text">
               ${this.length} min
@@ -20,12 +31,10 @@ class Break {
               </div>
           `;
 
-    timeTable.appendToDay(day, item);
-  }
+    this.dayEl.appendChild(item);
 
-  calcWidth() {
-    console.log(CONST_SIZEFOR10MIN);
-    return (this.length / 10) * +CONST_SIZEFOR10MIN;
+     // Width or height is calculated dynamically
+     this.setElementHeightOrWidth(item, this.length);
   }
 
 }

@@ -1,0 +1,41 @@
+@keyframes siteNavSlideIn {
+    0% {
+        transform: translateX(-100vw);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes siteNavSlideOut {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100vw);
+    }
+}
+@keyframes sidebarBackdropSlideIn {
+    0% {
+        transform: translateX(-100vw);
+        opacity: 0;
+        backdrop-filter: none;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+        backdrop-filter: blur(2px);
+    }
+}
+@keyframes sidebarBackdropSlideOut {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+        backdrop-filter: blur(2px);
+    }
+    100% {
+        transform: translateX(-100vw);
+        opacity: 0;
+        backdrop-filter: none;
+    }
+}
+

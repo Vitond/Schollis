@@ -1,12 +1,54 @@
-.main-area {
-    padding: 10rem;
-  
-    display: flex;
+.container {
+  width: 100%;
+
+  display: flex;
+
+  @media screen and (max-width: $bp-layout-mobile) {
     flex-direction: column;
-    flex: 1;
   }
-  .container {
-    width: 100%;
+}
+.main-area {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
   
+    flex-basis: 80%;
+    flex-shrink: 0;
+
+    transition: filter .2s;
+
+    @media screen and (max-width: $bp-layout-mobile) {
+      margin-top: 10rem;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+    @media screen and (max-width: 500px) {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+}
+.sidebar {
+  flex: 0 0 20%;
+
+  @media screen and (max-width: $bp-layout-mobile) {
+    background-color: $color-primary;
+    width: 100%;
+
+    flex-basis: 100%;
     display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    position: fixed;
+    z-index: 10;
   }
+}
+
+
+
+
+
+  
+
+

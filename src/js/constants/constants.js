@@ -1,1 +1,2 @@
-export const CONST_SIZEFOR10MIN = 2.5;
+export const CONST_WIDTHFOR10MIN = 2.3;
+export const CONST_HEIGHTFOR10MIN = 2;

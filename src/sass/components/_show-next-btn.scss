@@ -1,23 +1,25 @@
 .show-next-btn {
     margin-top: 2rem;
-    background-color: $color-white;
+    background-color: $color-primary;
     margin-left: auto;
     margin-right: auto;
-    padding: 1rem 2rem;
+    padding: 1.5rem 2.5rem;
     border: none;
     cursor: pointer;
     transition: all .2s;
 
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     text-align: center;
-    color: $color-primary;
+    color: $color-white;
     font-family: 'PT Sans', sans-serif;
 
     display: block;
 
     &:hover {
-      transform: translateY(-3px);
       background-color: $color-primary;
+
       color: $color-white;
+
+      transform: translateY(-3px);
     }
 }

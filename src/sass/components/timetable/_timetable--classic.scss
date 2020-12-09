@@ -1,0 +1,177 @@
+.timetable {
+    &--classic {
+        border-top: 2px solid $color-primary-light;
+        width: 121rem;
+        margin-bottom: 2rem;
+    
+        font-size: 1.3rem;
+    
+        align-self: flex-start;
+    
+        position: relative;
+    
+        & .heading-secondary {
+          text-transform: uppercase;
+          font-size: 3rem;
+    
+          position: absolute;
+          top: -6rem;
+          left: 0;
+        }
+        & .timetable__day {
+          border-right: 2px solid $color-primary-light;
+          border-left: 2px solid $color-primary-light;
+          width: 100%;
+    
+          display: flex;
+          flex-shrink: 0;
+    
+          position: relative;
+    
+          &--axis {
+            &:not(:first-of-type) {
+              margin-top: 8rem;
+              border-top: 2px solid $color-primary-light;
+            }
+          }
+        }
+        & .timetable__dayname {
+          height: 100%;
+    
+          display: flex;
+          align-items: center;
+    
+          position: absolute;
+          top: 0;
+          left: -2rem;
+        }
+        & .timetable__dayname-text {
+          color: $color-black;
+          font-size: 1.6rem;
+          text-transform: uppercase;
+    
+          transform: translateX(-50%) rotate(-90deg);
+        }
+        .subject {
+          padding: 1rem;
+          width: $subject-width;
+          cursor: pointer;
+          border-left: 1px solid transparent;
+          border-right: 1px solid transparent;
+          border-bottom: 2px solid $color-primary-light;
+          transition: all .2s;
+    
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          flex-shrink: 0;
+    
+          position: relative;
+          overflow-wrap: break-word;
+
+          &.active {
+            background-color: $color-primary-light;
+          }
+    
+          &:hover {
+            border-bottom: 2px solid $color-primary;
+          }
+    
+          &__symbol {
+            text-align: center;
+            font-size: 250%;
+          }
+          &__teacher {
+            color: $color-brown;
+            text-align: center;
+            font-size: 1em;
+    
+            overflow-wrap: break-word;
+          }
+          &__group {
+            width: 100%;
+          }
+          &__classroom {
+            color: $color-black;
+            text-align: center;
+          }
+          &__time {
+            position: absolute;
+            top: -4rem;
+          }
+          &__number {
+           /*  font-weight: bold; */
+            font-size: 1.8rem;
+
+            position: absolute;
+            top: -7rem;
+          }
+          &--changed {
+            border: 1px solid $color-changed;
+    
+            position: relative;
+          }
+          &--crosschecked {
+            border: 1px solid $color-crosschecked;
+    
+            &::after {
+              content: "";
+              clip-path: polygon(0% 99%, 99% 0%, 100% 0, 100% 1%, 1% 100%, 0% 100%);
+              width: 100%;
+              height: 100%;
+              background-color: red;
+    
+              top: 0;
+              position: absolute;
+            }
+          }
+        }
+        .break {
+          border-bottom: 2px solid $color-primary-light;
+    
+          position: relative;
+
+          &.active {
+            background-color: $color-primary-light;
+          }
+    
+          &__text {
+            width: $subject-width;
+    
+            font-size: 0.8em;
+            color: $color-black;
+            text-align: center;
+    
+            flex-shrink: 0;
+    
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%) rotate(-90deg);
+          }
+        }
+        .blank {
+          border-bottom: 2px solid $color-primary-light;
+    
+          flex-shrink: 0;
+        }
+        .marker {
+          height: 1.5rem;
+          width: 3rem;
+
+          bottom: 0;
+
+          &__line {
+            display: none;
+          }
+          &__triangle {
+            height: 1.5rem;
+            width: 3rem;
+            clip-path: polygon(0 100%, 100% 100%, 50% 0);
+
+            bottom: 0;
+            transform: /* translateX(-50%)  */translateY(-2px);
+          }
+        }
+      }
+}

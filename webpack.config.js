@@ -10,6 +10,7 @@ module.exports = {
     mode: 'development',
     devServer: {
         contentBase: './public'
-    }
+    },
+
 };
 

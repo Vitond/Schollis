@@ -1,49 +1,77 @@
-import {CONST_SIZEFOR10MIN} from '../../constants/constants.js';
+
 
 class Subject {
-  constructor(baseSubj, information) {
-    if (baseSubj) {
-      for (const key in baseSubj) {
-        this[key] = baseSubj[key];
+  constructor(props, dayEl, setElementHeightOrWidth) {
+  
+    // If the subject is based on another subject, copying all its key-value pairs
+    if (props.baseSubj) {
+      for (const key in props.baseSubj) {
+        this[key] = props.baseSubj[key];
       }
     }
+    ;
 
-    if (information) {
-      for (const key in information) {
-        this[key] = information[key];
+    // If information ({symbol: "", classroom: "", teacher: "", attr: ""} ) is provided, overriding the values of the base subject
+    if (props.information) {
+      for (const key in props.information) {
+        this[key] = props.information[key];
       }
+      
     }
 
-    if (!(baseSubj || information)) {
-      this.isBlank = true;
+    // If baseSbj doesn´t exist and information isn´t provided, returning
+    if (!(props.baseSubj || props.information)) {
+      return;
     }
+
+    this.length = 45;
+    this.timeAxis = props.timeAxis;
+    this.displayMode = props.displayMode;
+
+    if (dayEl) {
+      this.dayEl = dayEl;
+    }
+
+    if (props.number) {
+      this.number = props.number;
+    }
+
+    // Method for setting the element width or height based on its length in minutes
+    this.setElementHeightOrWidth = setElementHeightOrWidth;
+
   }
 
-  render(day, timeTable) {
+  render () {
     const item = document.createElement("div");
-    item.className = "subject";
+    item.classList = `subject`;
 
+    // Two types of attributes are supported - crosschecked and changed
     if (this.attr == "crosschecked" || this.attr == "changed") {
       item.classList.add(`subject--${this.attr}`);
     }
 
-    if (!this.isBlank) {
+      const time = this.displayMode === 'schollis' || this.timeAxis ? '<div class="subject__time"> 10:00 - 10:45 </div>' : '';
+      const number = this.displayMode === 'schollis' || this.timeAxis ? `<div class="subject__number"> ${this.number} </div>` : '';
       item.innerHTML = `
           <div class="subject__symbol">
               ${this.symbol}
           </div>
-          <div class="subject__classroom">
-          ${this.classroom}
+          <div class="subject__group">
+            <div class="subject__classroom">
+            ${this.classroom}
+            </div>
+            <div class="subject__teacher">
+            ${this.teacher}
+            </div>
           </div>
-          <div class="subject__teacher">
-          ${this.teacher}
-          </div>
+          ${time}
+          ${number}
      `;
-    }
 
-    item.style.width = `${4.5 * CONST_SIZEFOR10MIN}rem`;
+    this.dayEl.appendChild(item);
 
-    timeTable.appendToDay(day, item);
+     // Width or height is calculated dynamically
+     this.setElementHeightOrWidth(item, this.length);
   }
 }
 

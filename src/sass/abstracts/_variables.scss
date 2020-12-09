@@ -1,10 +1,11 @@
 // COLOR
 $color-primary: #72c4ff;
-$color-primary-light: lighten($color-primary, 23%);
+$color-primary-light: lighten($color-primary, 20%);
 $color-gray-light-1: #f1f1f1;
 $color-gray-dark-1: #525252;
-$color-brown: #c3acac;
+$color-brown: #967368;
 $color-white: #fff;
+$color-black: #000;
 
 //timetable
 $color-changed: #ffb169;
@@ -16,6 +17,8 @@ $break25-width: 5rem;
 
 $dayname-width: 10rem;
 $subject-width: 10rem;
-
 //
-$item-height: 6rem;
+$item-height: 8rem;
+
+//BREAKPOINTS
+$bp-layout-mobile: 800px;

@@ -1,165 +1,556 @@
-import TimeTable from './modules/TimeTable.js';
-import Subject from './modules/TimeTable/Subject.js';
+import TimeTable from "./modules/TimeTable.js";
+import Subject from "./modules/TimeTable/Subject.js";
+import * as fcns from "./utils/functions";
 
-const timeTable1 = new TimeTable();
+//IMAGINARY TIME
+globalThis.time = "12:00:00";
+const updateTime = () => {
+  setTimeout(() => {
+    globalThis.time = fcns.convertSecondsToTime(
+      fcns.convertTimeToSeconds(globalThis.time) + 60
+    );
+    updateTime();
+  }, 1000);
+};
+updateTime();
+//
 
-const matika = new Subject(null, {
-  symbol: "M",
-  classroom: "Septima",
-  teacher: "Otáhalíková",
+const timeTable1 = new TimeTable({
+  id: "timetable",
+  type: "student",
+  displayMode: "schollis",
+  timeWindow: { start: "7:00:00", end: "15:20:00" },
 });
-const matematickySeminar = new Subject(null, {
-  symbol: "MS",
-  classroom: "1.B",
-  teacher: "Otáhalíková",
+
+// Subject data structure
+
+/* 
+
+{ baseSubj: subject,
+  information: {
+    symbol: *string*,
+    classroom: *string*,
+    teacher: *string*
+}}
+
+*/
+
+const matika = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "M",
+    classroom: "Septima",
+    teacher: "Otáhalíková",
+  },
 });
-const nemcina = new Subject(null, {
-  symbol: "N",
-  classroom: "Učebna NJ",
-  teacher: "Daňková",
+const matematickySeminar = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "MS",
+    classroom: "1.B",
+    teacher: "Špnepfefernbergová",
+  },
 });
-const cestina = new Subject(null, {
-  symbol: "ČJ",
-  classroom: "Septima",
-  teacher: "Lanková",
+const nemcina = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "N",
+    classroom: "Učebna NJ",
+    teacher: "Daňková",
+  },
 });
-const anglictina = new Subject(null, {
-  symbol: "AJ",
-  classroom: "Septima",
-  teacher: "Zvoníčková",
+const cestina = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "ČJ",
+    classroom: "Septima",
+    teacher: "Lanková",
+  },
 });
-const programovani = new Subject(null, {
-  symbol: "PG",
-  classroom: "Velká IVT učebna",
-  teacher: "Mariánek",
+const anglictina = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "AJ",
+    classroom: "Septima",
+    teacher: "Zvoníčková",
+  },
 });
-const telocvik = new Subject(null, {
-  symbol: "TV",
-  classroom: "Učebna TV3",
-  teacher: "Trojánek",
+const programovani = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "PG",
+    classroom: "Velká IVT učebna",
+    teacher: "Mariánek",
+  },
 });
-const dejepis = new Subject(null, {
-  symbol: "D",
-  classroom: "Učebna D/Z",
-  teacher: "Urbánek",
+const telocvik = new Subject({
+  baseSunj: null,
+  information: {
+    symbol: "TV",
+    classroom: "Učebna TV3",
+    teacher: "Trojánek",
+  },
 });
-const fyzika = new Subject(null, {
-  symbol: "FY",
-  classroom: "Učebna FY",
-  teacher: "Lorenc",
+const dejepis = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "D",
+    classroom: "Učebna D/Z",
+    teacher: "Urbánek",
+  },
 });
-const deskriptiva = new Subject(null, {
-  symbol: "DG",
-  classroom: "Septima",
-  teacher: "Mašková",
+const fyzika = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "FY",
+    classroom: "Učebna FY",
+    teacher: "Lorenc",
+  },
 });
-const chemie = new Subject(null, {
-  symbol: "CH",
-  classroom: "Septima",
-  teacher: "Kubát",
+const deskriptiva = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "DG",
+    classroom: "Septima",
+    teacher: "Mašková",
+  },
 });
-const biologie = new Subject(null, {
-  symbol: "BI",
-  classroom: "Učebna Biologie",
-  teacher: "Havlátová",
+const chemie = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "CH",
+    classroom: "Septima",
+    teacher: "Kubát",
+  },
 });
-const zsv = new Subject(null, {
-  symbol: "ZSV",
-  classroom: "Septima",
-  teacher: "Kurdiovská",
+const biologie = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "BI",
+    classroom: "Učebna Biologie",
+    teacher: "Havlátová",
+  },
 });
-const zemepis = new Subject(null, {
-  symbol: "Z",
-  classroom: "Septima",
-  teacher: "Trojánek",
+const zsv = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "ZSV",
+    classroom: "Septima",
+    teacher: "Kurdiovská",
+  },
+});
+const zemepis = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "Z",
+    classroom: "Septima",
+    teacher: "Trojánek",
+  },
 });
 //vojta
-const akonverzace = new Subject(null, {
-  symbol: "AK",
-  classroom: "Septima",
-  teacher: "Dračková",
+const akonverzace = new Subject({
+  baseSubj: null,
+  information: {
+    symbol: "AK",
+    classroom: "Septima",
+    teacher: "Dračková",
+  },
 });
 
 timeTable1.clear();
 
 timeTable1.data = [
-  [
-    ["bla", 105],
-    ["sub", matematickySeminar],
-    ["bre", 15],
-    ["sub", nemcina],
-    ["bre", 10],
-    ["sub", cestina],
-    ["bre", 10],
-    ["sub", matika],
-    ["bre", 10],
-    ["sub", anglictina],
-    ["bre", 30, true],
-    ["sub", programovani],
-    ["bre", 5],
-    ["sub", programovani],
-  ],
-  [
-    ["sub", akonverzace],
-    ["bre", 5],
-    ["sub", akonverzace],
-    ["bre", 10],
-    ["sub", telocvik],
-    ["bre", 15],
-    ["sub", anglictina],
-    ["bre", 10],
-    ["sub", dejepis],
-    ["bre", 10],
-    ["sub", fyzika],
-    ["bre", 10],
-    ["sub", nemcina, { classroom: "Septima" }],
-  ],
-
-  // [['bla', 50], ['sub', deskriptiva] , ['bre', 10], ['sub', deskriptiva], ['bre', 15] , ['sub', chemie] ,['bre', 10] ,['sub', biologie],['bre', 10] , ['sub', matika], ['bre', 10], ['sub', zsv]],
-  [
-    ["bla", 165],
-    ["sub", chemie],
-    ["bre", 10],
-    ["sub", biologie],
-    ["bre", 10],
-    ["sub", matika],
-    ["bre", 10],
-    ["sub", zsv],
-  ],
-
-  [
-    ["sub", matematickySeminar, { classroom: "Učebna Chemie" }],
-    ["bre", 5],
-    ["sub", zemepis],
-    ["bre", 10],
-    ["sub", anglictina],
-    ["bre", 15],
-    ["sub", cestina],
-    ["bre", 10],
-    ["sub", nemcina, { classroom: "Kvinta" }],
-    ["bre", 10],
-    ["sub", telocvik],
-    ["bre", 10],
-    ["sub", dejepis],
-    ["bre", 30, true],
-    ["sub", biologie],
-    ["bre", 5],
-    ["sub", zsv],
-  ],
-
-  [
-    ["bla", 50],
-    ["sub", zemepis, { classroom: "Učebna FY Riegrova" }],
-    ["bre", 10],
-    ["sub", matika, { classroom: "Učebna Chemie" }],
-    ["bre", 15],
-    ["sub", cestina, { classroom: "3.A" }],
-    ["bre", 10],
-    ["sub", biologie],
-    ["bre", 10],
-    ["sub", chemie],
-    ["bre", 10],
-    ["sub", fyzika, { classroom: "Septima" }],
-  ],
+  {
+    dayName: "Pondělí",
+    date: "6.12.2020",
+    timeAxis: true,
+    elements: [
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "8:45:00", end: "9:30:00" },
+          number: 2,
+          baseSubj: matematickySeminar,
+        },
+      },
+      { type: "break", props: { length: 15 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "9:45:00", end: "10:30:00" },
+          number: 3,
+          baseSubj: nemcina,
+        },
+      },
+      { type: "break", props: { length: 15 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "10:40:00", end: "11:25:00" },
+          number: 4,
+          baseSubj: cestina,
+        },
+      },
+      { type: "break", props: { length: 10 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "11:35:00", end: "12:20:00" },
+          number: 5,
+          baseSubj: matika,
+        },
+      },
+      { type: "break", props: { length: 10 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "12:30:00", end: "13:15:00" },
+          number: 6,
+          baseSubj: anglictina,
+        },
+      },
+      { type: "break", props: { length: 30, lunchTime: true } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "13:45:00", end: "14:30:00" },
+          number: 7,
+          baseSubj: programovani,
+        },
+      },
+      { type: "break", props: { length: 5 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "14:35:00", end: "15:20:00" },
+          number: 8,
+          baseSubj: programovani,
+        },
+      },
+    ],
+  },
+  {
+    dayName: "Úterý",
+    date: "7.12.2020",
+    timeAxis: false,
+    elements: [
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "8:45:00", end: "9:30:00" },
+          number: 2,
+          baseSubj: matematickySeminar,
+        },
+      },
+      { type: "break", props: { length: 15 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "9:45:00", end: "10:30:00" },
+          number: 3,
+          baseSubj: nemcina,
+        },
+      },
+      { type: "break", props: { length: 15 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "10:40:00", end: "11:25:00" },
+          number: 4,
+          baseSubj: cestina,
+        },
+      },
+      { type: "break", props: { length: 10 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "11:35:00", end: "12:20:00" },
+          number: 5,
+          baseSubj: matika,
+        },
+      },
+      { type: "break", props: { length: 10 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "12:30:00", end: "13:15:00" },
+          number: 6,
+          baseSubj: anglictina,
+        },
+      },
+      { type: "break", props: { length: 30, lunchTime: true } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "13:45:00", end: "14:30:00" },
+          number: 7,
+          baseSubj: programovani,
+        },
+      },
+      { type: "break", props: { length: 5 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "14:35:00", end: "15:20:00" },
+          number: 8,
+          baseSubj: programovani,
+        },
+      },
+    ],
+  },
+  {
+    dayName: "Pondělí",
+    date: "7.12.2020",
+    timeAxis: false,
+    elements: [
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "8:45:00", end: "9:30:00" },
+          number: 2,
+          baseSubj: matematickySeminar,
+        },
+      },
+      { type: "break", props: { length: 15 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "9:45:00", end: "10:30:00" },
+          number: 3,
+          baseSubj: nemcina,
+        },
+      },
+      { type: "break", props: { length: 15 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "10:40:00", end: "11:25:00" },
+          number: 4,
+          baseSubj: cestina,
+        },
+      },
+      { type: "break", props: { length: 10 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "11:35:00", end: "12:20:00" },
+          number: 5,
+          baseSubj: matika,
+        },
+      },
+      { type: "break", props: { length: 10 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "12:30:00", end: "13:15:00" },
+          number: 6,
+          baseSubj: anglictina,
+        },
+      },
+      { type: "break", props: { length: 30, lunchTime: true } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "13:45:00", end: "14:30:00" },
+          number: 7,
+          baseSubj: programovani,
+        },
+      },
+      { type: "break", props: { length: 5 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "14:35:00", end: "15:20:00" },
+          number: 8,
+          baseSubj: programovani,
+        },
+      },
+    ],
+  },
+  {
+    dayName: "Pondělí",
+    date: "7.12.2020",
+    timeAxis: false,
+    elements: [
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "8:45:00", end: "9:30:00" },
+          number: 2,
+          baseSubj: matematickySeminar,
+        },
+      },
+      { type: "break", props: { length: 15 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "9:45:00", end: "10:30:00" },
+          number: 3,
+          baseSubj: nemcina,
+        },
+      },
+      { type: "break", props: { length: 15 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "10:40:00", end: "11:25:00" },
+          number: 4,
+          baseSubj: cestina,
+        },
+      },
+      { type: "break", props: { length: 10 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "11:35:00", end: "12:20:00" },
+          number: 5,
+          baseSubj: matika,
+        },
+      },
+      { type: "break", props: { length: 10 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "12:30:00", end: "13:15:00" },
+          number: 6,
+          baseSubj: anglictina,
+        },
+      },
+      { type: "break", props: { length: 30, lunchTime: true } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "13:45:00", end: "14:30:00" },
+          number: 7,
+          baseSubj: programovani,
+        },
+      },
+      { type: "break", props: { length: 5 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "14:35:00", end: "15:20:00" },
+          number: 8,
+          baseSubj: programovani,
+        },
+      },
+    ],
+  },
+  {
+    dayName: "Pondělí",
+    date: "5.12.2020",
+    timeAxis: false,
+    elements: [
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "8:45:00", end: "9:30:00" },
+          number: 2,
+          baseSubj: matematickySeminar,
+        },
+      },
+      { type: "break", props: { length: 15 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "9:45:00", end: "10:30:00" },
+          number: 3,
+          baseSubj: nemcina,
+        },
+      },
+      { type: "break", props: { length: 15 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "10:40:00", end: "11:25:00" },
+          number: 4,
+          baseSubj: cestina,
+        },
+      },
+      { type: "break", props: { length: 10 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "11:35:00", end: "12:20:00" },
+          number: 5,
+          baseSubj: matika,
+        },
+      },
+      { type: "break", props: { length: 10 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "12:30:00", end: "13:15:00" },
+          number: 6,
+          baseSubj: anglictina,
+        },
+      },
+      { type: "break", props: { length: 30, lunchTime: true } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "13:45:00", end: "14:30:00" },
+          number: 7,
+          baseSubj: programovani,
+        },
+      },
+      { type: "break", props: { length: 5 } },
+      {
+        type: "subject",
+        props: {
+          time: { beginning: "14:35:00", end: "15:20:00" },
+          number: 8,
+          baseSubj: programovani,
+        },
+      },
+    ],
+  },
 ];
-timeTable1.renderData();
+timeTable1.render();
+
+timeTable1.changeDisplayMode("classic");
+timeTable1.changeDisplayMode("schollis");
+
+const toggleNavBtn = document.getElementById("toggle-nav-button");
+const siteNav = document.getElementById("site-nav");
+const sidebarBackdrop = document.getElementById("sidebar-backdrop");
+const mainArea = document.getElementById('main-area');
+
+const toggleNavBtnClickedHandler = () => {
+  toggleNavBtn.removeEventListener("click", toggleNavBtnClickedHandler);
+
+  fcns.showOrHideEl(
+    siteNav,
+    "site-nav",
+    () => {
+      fcns.switchClass(
+        toggleNavBtn,
+        "toggle-nav-button--hide",
+        "togle-nav-button--show"
+      );
+      mainArea.style.filter = 'blur(3px)';
+    },
+    () => {
+      toggleNavBtn.addEventListener("click", toggleNavBtnClickedHandler);
+      
+    },
+    () => {
+      fcns.switchClass(
+        toggleNavBtn,
+        "toggle-nav-button--hide",
+        "togle-nav-button--show"
+      );
+      mainArea.style.filter = 'none';
+    },
+    () => {
+      toggleNavBtn.addEventListener("click", toggleNavBtnClickedHandler);
+    }
+  );
+  fcns.showOrHideEl(sidebarBackdrop, 'sidebar__backdrop');
+};
+
+toggleNavBtn.addEventListener("click", toggleNavBtnClickedHandler);
+
+sidebarBackdrop.addEventListener("click", () => {
+  toggleNavBtn.click();
+});

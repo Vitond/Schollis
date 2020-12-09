@@ -1,0 +1,135 @@
+.site-nav {
+    margin-top: 10rem;
+   
+    letter-spacing: 1px;
+  
+    display: flex;
+    flex-direction: column;
+  
+    @media screen and (max-width: $bp-layout-mobile) {
+     margin-top: 0;
+     margin-left: auto;
+     padding-bottom: 4rem;
+     padding-top: 4rem;
+     background-color: $color-primary;
+     width: 100%;
+     padding-right: 2rem;
+   
+     position: absolute;
+     z-index: 1;
+     top: 9rem;
+    }
+  
+    &--hidden {
+      @media screen and (max-width: $bp-layout-mobile) {
+        display: none;
+      }
+    }
+    &--visible {
+      animation: siteNavSlideIn .2s;
+    }
+    &--hiding {
+      animation: siteNavSlideOut .2s;
+    }
+  
+    &__list {
+      width: 100%;
+      list-style: none;
+    }
+    &__item {
+      background-color: $color-gray-light-1;
+      height: $item-height;
+      cursor: pointer;
+  
+      text-align: center;
+      color: $color-primary;
+  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      @media screen and (max-width: $bp-layout-mobile) {
+        background-color: transparent;
+        height: auto;
+  
+        color: $color-gray-light-1;
+        font-size: 2.5rem;
+        text-align: right;
+  
+        justify-content: flex-end;
+      }
+  
+      &--active {
+        background-color: $color-white;
+  
+        @media screen and (max-width: $bp-layout-mobile) {
+          background-color: transparent;
+  
+          color: $color-white;
+          font-weight: bold;
+        }
+      }
+  
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+  
+        @media screen and (max-width: $bp-layout-mobile) {
+         margin-bottom: 2.5rem;
+        }
+      }
+    }
+  }
+  .toggle-nav-button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    
+    display: none;
+
+    position: relative;
+    z-index: 1;
+  
+    @media screen and (max-width: $bp-layout-mobile) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &--hide {
+      & .toggle-nav-button__line {
+        &:first-child {
+          transform: translateX(.25rem);
+        }
+        &:last-child {
+          transform: translateX(-0.25rem);
+        }
+      }
+    }
+  
+    &:hover {
+        & .toggle-nav-button__line {
+          &:first-child {
+            transform: translateX(.25rem);
+          }
+          &:last-child {
+            transform: translateX(-0.25rem);
+          }
+        }
+    }
+  
+    &__line {
+      height: 1rem;
+      width: 6rem;
+      background-color: $color-white;
+      border-radius: 2px;
+      transition: all .2s;
+  
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+    }
+  }

@@ -1,0 +1,25 @@
+.marker {
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+
+    &__triangle {
+        background-color: $color-primary;
+        height: 3rem;
+        width: 1.5rem;
+        clip-path: polygon(0 0, 100% 50%, 0 100%);
+
+        position: absolute;
+        z-index: 1;
+
+        display: block;
+    }
+    &__line {
+        height: 2px;
+        width: calc(var(--day-width) * 1rem - 2rem);
+        background: repeating-linear-gradient(90deg, $color-primary, $color-primary .5rem, transparent .5rem, transparent 1rem);
+
+        position: absolute;
+    }
+}

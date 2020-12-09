@@ -1,22 +1,29 @@
-import {CONST_SIZEFOR10MIN} from '../../constants/constants.js';
+
 
 class Blank {
-  constructor(length) {
-    this.length = length;
+  constructor(props, dayEl, setElementHeightOrWidth) {
+
+    // Duration of the blank space in minutes
+    this.length = props.length;
+
+    // Keeping track of the day element
+    this.dayEl = dayEl;
+
+    // Method for setting the element width or height based on its length in minutes
+    this.setElementHeightOrWidth = setElementHeightOrWidth;
   }
 
-  calcWidth() {
-    return (this.length / 10) * +CONST_SIZEFOR10MIN;
-  }
-
-  render(day, timeTable) {
+  // Renders element
+  render() {
     const item = document.createElement("div");
-    item.className = `blank blank--${this.length}`;
+    item.className = `blank`;
 
-    item.style.width = `${this.calcWidth()}rem`;
+    this.dayEl.appendChild(item);
 
-    timeTable.appendToDay(day, item);
+    // Width or height is calculated dynamically
+    this.setElementHeightOrWidth(item, this.length);
   }
+
 }
 
 export default Blank;

@@ -1,0 +1,61 @@
+.marks {
+  margin-right: 10rem;
+  height: 100%;
+  width: 50%;
+
+  display: flex;
+  flex-direction: column;
+
+  letter-spacing: 1px;
+
+  &__list {
+    list-style: none;
+  }
+  &__mark {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: $color-white;
+    margin-bottom: 1rem;
+    min-height: $item-height;
+    border: 2px solid $color-primary-light;
+    cursor: pointer;
+    transition: all 0.1s;
+
+    font-size: 1.6rem;
+    color: $color-black;
+
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      box-shadow: inset -3px -3px 3px rgba($color-primary-light, 0.5);
+      border-bottom: 2px solid $color-primary;
+    }
+  }
+  &__description {
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+    flex: 0 1 75%;
+  }
+  &__subject {
+    flex: 0 0 20%;
+  }
+  &__value {
+    flex: 0 0 5%;
+  }
+  &__button-container {
+    padding-bottom: 2rem;
+
+    flex-grow: 1;
+  }
+  &__heading {
+    margin-bottom: 2rem;
+
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+}

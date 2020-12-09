@@ -1,0 +1,131 @@
+
+.timetable {
+  &--schollis {
+    width: calc(
+      (
+          var(--row-day-count) * var(--day-width) + var(--row-day-count) *
+            var(--day-margin-right)
+        ) * 1rem
+    );
+    margin-right: calc((0 - var(--day-margin-right)) * 1rem);
+
+    display: flex;
+    flex-wrap: wrap;
+
+    position: relative;
+    overflow: visible;
+
+    & .heading-secondary {
+      text-transform: uppercase;
+
+      position: absolute;
+      top: -5rem;
+      left: 0;
+    }
+    & .timetable__day {
+      width: calc(var(--day-width) * 1rem);
+      margin-right: calc(var(--day-margin-right) * 1rem);
+      margin-bottom: 10rem;
+      padding-left: 2rem;
+      margin-top: 5rem;
+
+      display: flex;
+      flex-direction: column;
+
+      position: relative;
+    }
+    & .timetable__dayname {
+      top: -4rem;
+      position: absolute;
+
+      font-size: 2rem;
+    }
+    & .subject {
+      width: 100% !important;
+      border: 2px solid $color-primary-light;
+      padding: 1rem 0rem 1rem 2rem;
+      cursor: pointer;
+
+      font-size: 1.6rem;
+
+      display: flex;
+      align-items: center;
+
+      position: relative;
+
+      &.active {
+        background-color: $color-primary-light;
+      }
+
+      &:hover {
+        border-bottom: 2px solid $color-primary;
+      }
+
+      &__symbol {
+        font-size: 4rem;
+
+        position: relative;
+        z-index: 1;
+      }
+      &__group {
+        margin-left: 2rem;
+        padding-right: 2rem;
+        width: 40%;
+
+        display: flex;
+        flex-direction: column;
+      }
+      &__number {
+        position: absolute;
+        left: -2rem;
+      }
+      &__teacher {
+        color: $color-brown;
+        font-size: 0.8em;
+
+        overflow-wrap: break-word;
+        position: relative;
+        z-index: 1;
+      }
+      &__classroom {
+        font-size: 0.8em;
+
+        overflow-wrap: break-word;
+        position: relative;
+        z-index: 1;
+      }
+      &__time {
+        margin-left: auto;
+        margin-right: 2rem;
+
+        font-size: 0.8em;
+
+        flex-shrink: 0;
+      }
+    }
+    & .break {
+      margin-right: 2rem;
+      margin-left: auto;
+
+      display: flex;
+      align-items: center;
+
+      font-size: 1.2rem;
+      color: $color-brown;
+    }
+    & .blank {
+      display: none;
+    }
+    & .marker {
+      height: 3rem;
+      width: 100%;
+
+      &__line {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      transform: translateY(-50%);
+    }
+  }
+}
