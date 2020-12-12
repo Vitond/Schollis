@@ -2,8 +2,14 @@ import Subject from "./Subject.js";
 import Blank from "./Blank.js";
 import Break from "./Break.js";
 import DayName from "./DayName.js";
-import Marker from '../TimeTable/Marker/Marker';
-import { DISPLAYMODE_CLASSIC, DISPLAYMODE_SCHOLLIS } from '../../constants/keywords';
+import Marker from "../TimeTable/Marker/Marker";
+import {
+  DISPLAYMODE_CLASSIC,
+  DISPLAYMODE_SCHOLLIS,
+  TIMETABLEELEMENT_BLANK,
+  TIMETABLEELEMENT_SUBJECT,
+  TIMETABLEELEMENT_BREAK,
+} from "../../constants/keywords";
 
 import {
   CONST_WIDTHFOR10MIN,
@@ -53,13 +59,13 @@ class Day {
       };
 
       const timeTableElObject =
-        timeTableElObj.type === "subject"
-          ? new Subject(props, dayEl, this.setElementHeightOrWidth.bind(this))
-          : timeTableElObj.type === "break"
-          ? new Break(props, dayEl, this.setElementHeightOrWidth.bind(this))
-          : timeTableElObj.type === "blank"
-          ? new Blank(props, dayEl, this.setElementHeightOrWidth.bind(this))
-          : new Subject();
+      timeTableElObj.type === TIMETABLEELEMENT_SUBJECT
+      ? new Subject(props, dayEl, this.setElementHeightOrWidth.bind(this))
+      : timeTableElObj.type === TIMETABLEELEMENT_BREAK
+      ? new Break(props, dayEl, this.setElementHeightOrWidth.bind(this))
+      : timeTableElObj.type === TIMETABLEELEMENT_BLANK
+      ? new Blank(props, dayEl, this.setElementHeightOrWidth.bind(this))
+      : new Subject();
 
       // Rendering the newly created timetable element
       timeTableElObject.render();
@@ -73,7 +79,12 @@ class Day {
 
   //Creates new marker element and appends it to the day element
   renderMarker() {
-    const marker = new Marker(this.dayEl, this.timeWindow, this.displayMode, this.dayObj);
+    const marker = new Marker(
+      this.dayEl,
+      this.timeWindow,
+      this.displayMode,
+      this.dayObj
+    );
     marker.render();
 
     this.marker = marker;
@@ -85,14 +96,12 @@ class Day {
 
     return setTimeout(() => {
       this.startUpdatingMarker();
-    }, 10000)
+    }, 10000);
   }
 
-  //Creates blank elements at the beginning and end of the timetable 
+  //Creates blank elements at the beginning and end of the timetable
   addBlanks() {
-
     if (this.displayMode === DISPLAYMODE_CLASSIC) {
-
       //Getting beginning time of the first subject
       const beginningEl = this.dayObj.elements.find((element) => {
         return element.type === "subject";
@@ -116,34 +125,30 @@ class Day {
       }
 
       //Calculating difference between time window ending and last subject ending
-      const endingDifferenceInSeconds = convertTimeToSeconds(this.timeWindow.end) - convertTimeToSeconds(end);
+      const endingDifferenceInSeconds =
+        convertTimeToSeconds(this.timeWindow.end) - convertTimeToSeconds(end);
 
       //If there is free space, creating a blank timetable element that precisely fits the free space
       if (endingDifferenceInSeconds > 0) {
         this.addBlank("end", endingDifferenceInSeconds);
       }
-      
     }
   }
 
   //Creates a 'blank' timetable element either at the beginning or at the end of the timetable and pushes it to render list
   addBlank(position, lengthInSeconds) {
-
     //Converting length to minutes
     const length = lengthInSeconds / 60;
 
     if (position === "beginning") {
-
       //Creating blank object
-      const blank =  {type: "blank", props: {length: length}};
+      const blank = { type: "blank", props: { length: length } };
 
       //Appending it to the beginning of render list
       this.renderList.unshift(blank);
-
     } else if (position === "end") {
-
       //Creating blank object
-      const blank =  {type: "blank", props: {length: length}};
+      const blank = { type: "blank", props: { length: length } };
 
       //Appending it to the end of render list
       this.renderList.push(blank);
@@ -152,19 +157,15 @@ class Day {
 
   //Calculates width or height of the timetable element. (Depends on the display mode)
   //At 'schollis' display mode, the timetable elements are organized vertically, therefore setting the height, because the height should respond to element´s length in minutes
-  //At 'classic' display mode, the timetable elements are organized vertically, therefore setting the width, because the width should respond to element´s length in minutes
+  //At 'classic' display mode, the timetable elements are organized horizontally, therefore setting the width, because the width should respond to element´s length in minutes
   //The width and height equivalents for given minute length are computed with the help of global constants
   setElementHeightOrWidth(el, length) {
     if (this.displayMode === DISPLAYMODE_CLASSIC) {
-
       el.removeAttribute("style");
       el.style.width = `${(length / 10) * +CONST_WIDTHFOR10MIN}rem`;
-
-    } else if (this.displayMode === "schollis") {
-
+    } else if (this.displayMode === DISPLAYMODE_SCHOLLIS) {
       el.removeAttribute("style");
       el.style.height = `${(length / 10) * +CONST_HEIGHTFOR10MIN}rem`;
-
     }
   }
 }

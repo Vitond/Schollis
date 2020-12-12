@@ -2,39 +2,47 @@ import TimeTable from "./modules/TimeTable.js";
 import Subject from "./modules/TimeTable/Subject.js";
 import * as fcns from "./utils/functions";
 
-//IMAGINARY TIME
+////////////////////
+////////IMAGINARY TIME - FOR TESTING PURPOSES
+////////////////////
+
+//Beginning time in format 'hours:minutes:seconds'
 globalThis.time = "12:00:00";
+
+//How often is the time updated
+//Number will be treated as milliseconds
+const updateTimeout = 1000;
+
+//To how many seconds of imaginary time is one second of real time equal to
+//For example, secondEquivalent of 60 means one second of real time is eqaul to one minute
+const secondEquivalent = 60;
+
 const updateTime = () => {
   setTimeout(() => {
     globalThis.time = fcns.convertSecondsToTime(
-      fcns.convertTimeToSeconds(globalThis.time) + 60
+      fcns.convertTimeToSeconds(globalThis.time) + secondEquivalent
     );
     updateTime();
-  }, 1000);
+  }, updateTimeout);
 };
-updateTime();
-//
 
+//Starting to update the time
+updateTime();
+
+////////////////////
+////////SIMULATING DATA FETCHED FROM THE SERVER - FOR TESTING PURPOSES
+////////////////////
+
+//Timetable
 const timeTable1 = new TimeTable({
   id: "timetable",
   type: "student",
   displayMode: "schollis",
   timeWindow: { start: "7:00:00", end: "15:20:00" },
+  data: null
 });
 
-// Subject data structure
-
-/* 
-
-{ baseSubj: subject,
-  information: {
-    symbol: *string*,
-    classroom: *string*,
-    teacher: *string*
-}}
-
-*/
-
+//Subjects
 const matika = new Subject({
   baseSubj: null,
   information: {
@@ -147,7 +155,6 @@ const zemepis = new Subject({
     teacher: "Trojánek",
   },
 });
-//vojta
 const akonverzace = new Subject({
   baseSubj: null,
   information: {
@@ -157,8 +164,7 @@ const akonverzace = new Subject({
   },
 });
 
-timeTable1.clear();
-
+//Timetable data
 timeTable1.data = [
   {
     dayName: "Pondělí",
@@ -506,51 +512,72 @@ timeTable1.data = [
     ],
   },
 ];
+
+////////////////////
+////////HOME
+////////////////////
+
+timeTable1.clear();
+
 timeTable1.render();
 
+//Testing if changing the display mode works as it should
 timeTable1.changeDisplayMode("classic");
 timeTable1.changeDisplayMode("schollis");
 
+//Hooking needed elements
 const toggleNavBtn = document.getElementById("toggle-nav-button");
 const siteNav = document.getElementById("site-nav");
 const sidebarBackdrop = document.getElementById("sidebar-backdrop");
 const mainArea = document.getElementById('main-area');
 
+//Handler for 'click' event on the hamburger button
 const toggleNavBtnClickedHandler = () => {
+  
+  //Preventing user from broking the animation by removing event listener on the button
   toggleNavBtn.removeEventListener("click", toggleNavBtnClickedHandler);
-
+  
+  //Animating site-nav and backdrop  
   fcns.showOrHideEl(
     siteNav,
     "site-nav",
+    //Callback 1 (occurs when the button is activated)
     () => {
       fcns.switchClass(
         toggleNavBtn,
         "toggle-nav-button--hide",
         "togle-nav-button--show"
-      );
-      mainArea.style.filter = 'blur(3px)';
-    },
-    () => {
+        );
+        mainArea.style.filter = 'blur(3px)';
+      },
+      //Callback 2 (occurs when appearing animation is ended)
+      () => {
+        toggleNavBtn.addEventListener("click", toggleNavBtnClickedHandler);
+        
+      },
+      //Callback 3 (occurs when the button is disactivated)
+      () => {
+        fcns.switchClass(
+          toggleNavBtn,
+          "toggle-nav-button--hide",
+          "togle-nav-button--show"
+          );
+          mainArea.style.filter = 'none';
+        },
+        //Callback 4 (occurs when disappearing animation is ended)
+        () => {
+          toggleNavBtn.addEventListener("click", toggleNavBtnClickedHandler);
+        }
+        );
+        fcns.showOrHideEl(sidebarBackdrop, 'sidebar__backdrop');
+      };
+      
+      
+      //Handling click event on hamburger button
       toggleNavBtn.addEventListener("click", toggleNavBtnClickedHandler);
       
-    },
-    () => {
-      fcns.switchClass(
-        toggleNavBtn,
-        "toggle-nav-button--hide",
-        "togle-nav-button--show"
-      );
-      mainArea.style.filter = 'none';
-    },
-    () => {
-      toggleNavBtn.addEventListener("click", toggleNavBtnClickedHandler);
-    }
-  );
-  fcns.showOrHideEl(sidebarBackdrop, 'sidebar__backdrop');
-};
-
-toggleNavBtn.addEventListener("click", toggleNavBtnClickedHandler);
-
-sidebarBackdrop.addEventListener("click", () => {
-  toggleNavBtn.click();
-});
+      //Clicking the backdrop has same effect as clicking the hamburger button
+      sidebarBackdrop.addEventListener("click", () => {
+        toggleNavBtn.click();
+      });
+      

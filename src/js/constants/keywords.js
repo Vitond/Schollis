@@ -1,6 +1,6 @@
-const DISPLAYMODE_SCHOLLIS = "schollis";
-const DISPLAYMODE_CLASSIC = "classic";
+export const DISPLAYMODE_SCHOLLIS = "schollis";
+export const DISPLAYMODE_CLASSIC = "classic";
 
-const TIMETABLEELEMENT_SUBJECT = "subject";
-const TIMETABLEELEMENT_BREAK = "break";
-const TIMETABLEELEMENT_BLANK = "blank";
+export const TIMETABLEELEMENT_SUBJECT = "subject";
+export const TIMETABLEELEMENT_BREAK = "break";
+export const TIMETABLEELEMENT_BLANK = "blank";

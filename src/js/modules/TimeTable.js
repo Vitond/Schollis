@@ -14,7 +14,7 @@ class TimeTable {
     this.hook = document.getElementById(this.id);
 
     // The way how timetable will appear to the user. Currently two values provided - 'classic' and 'schollis'
-    if (parameters.displayMode !== DISPLAYMODE_CLASSIC && this.displayMode !== DISPLAYMODE_SCHOLLIS) {
+    if (parameters.displayMode !== DISPLAYMODE_CLASSIC & parameters.displayMode !== DISPLAYMODE_SCHOLLIS) {
       return;
     }
     this.displayMode = parameters.displayMode;

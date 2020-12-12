@@ -1,29 +1,45 @@
 
+//Creates a smooth animation of the element appearing and disappearing
+//Element follows this cycle: HIDDEN -> VISIBLE -> HIDING
+//Each state is represented by a CSS class
+//For example the HIDDEN class would be "defaultClass--hidden", where defaultClass is element´s default class
+//HIDING and VISIBLE classes must have an animation 
 
 export const showOrHideEl = (element, cssClass, callback1, callback2, callback3, callback4) => {
+
+    //If the element is HIDDEN
     if ([...element.classList].includes(`${cssClass}--hidden`)) {
 
+        //Applying VISIBLE class
         element.classList.remove(`${cssClass}--hidden`);
         element.classList.add(`${cssClass}--visible`);
 
+        //Executing callback1
         if (callback1) {callback1();};
 
         const animationEndHandler = () => {
-
+            
             if (callback2) {callback2();};
-          
+            
         }
-
+        
+        //When appear animation ends, executing callback2
         element.addEventListener('animationend', animationEndHandler, {
         capture: false,
         once: true,
         passive: false
         });
 
-    } else {
+    
+    }
+    //If element is VISIBLE 
+    else {
+
+        //Removing VISIBLE class, adding HIDING class
         element.classList.remove(`${cssClass}--visible`);
         element.classList.add(`${cssClass}--hiding`);
 
+        //Executing callback3
         if (callback3) {callback3();};
 
         const animationEndHandler = () => {
@@ -31,11 +47,10 @@ export const showOrHideEl = (element, cssClass, callback1, callback2, callback3,
             element.classList.remove(`${cssClass}--hiding`);
             element.classList.add(`${cssClass}--hidden`);
 
-            console.log(`executing for ${cssClass}`)
-
             if (callback4) {callback4();};
         }
 
+        //When disappear animation ends, removing HIDING class and adding HIDDEN class. Executing callback4.
         element.addEventListener('animationend', animationEndHandler, {
         capture: false,
         once: true,
@@ -74,7 +89,7 @@ export const convertSecondsToTime = (timeInSeconds) => {
 
 }
 
-//  Switching between two classes, if an element has a class A, the class A is replaced for class B, if an element has a class B, the class B is replaced for the class A
+//  Switching between two classes, if an element has a class A, the class A is replaced for the class B, if an element has a class B, the class B is replaced for the class A
 export const switchClass = (el, classA, classB) => {
     if ([...el.classList].includes(classA)) {
         el.classList.remove(classA);

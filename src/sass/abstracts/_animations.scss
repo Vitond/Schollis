@@ -16,26 +16,26 @@
 }
 @keyframes sidebarBackdropSlideIn {
     0% {
-        transform: translateX(-100vw);
+       /*  transform: translateX(-100vw);
+        backdrop-filter: none; */
         opacity: 0;
-        backdrop-filter: none;
     }
     100% {
-        transform: translateX(0);
+        /* transform: translateX(0);
+        backdrop-filter: blur(2px); */
         opacity: 1;
-        backdrop-filter: blur(2px);
     }
 }
 @keyframes sidebarBackdropSlideOut {
     0% {
-        transform: translateX(0);
+        /* transform: translateX(0);
+        backdrop-filter: blur(2px); */
         opacity: 1;
-        backdrop-filter: blur(2px);
     }
     100% {
-        transform: translateX(-100vw);
+        /* transform: translateX(-100vw);
+        backdrop-filter: none; */
         opacity: 0;
-        backdrop-filter: none;
     }
 }
 

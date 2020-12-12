@@ -2,7 +2,7 @@
 
 class Subject {
   constructor(props, dayEl, setElementHeightOrWidth) {
-  
+
     // If the subject is based on another subject, copying all its key-value pairs
     if (props.baseSubj) {
       for (const key in props.baseSubj) {
@@ -38,7 +38,6 @@ class Subject {
 
     // Method for setting the element width or height based on its length in minutes
     this.setElementHeightOrWidth = setElementHeightOrWidth;
-
   }
 
   render () {
