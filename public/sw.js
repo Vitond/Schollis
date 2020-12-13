@@ -6,7 +6,8 @@ self.addEventListener("install", event => {
             return cache.addAll([
                 "/",
                 "/css/screen.css",
-                "/js/app.js"
+                "/js/app.js",
+                "/favicon.svg"
             ]);//here should be added all css files
         })
     );
